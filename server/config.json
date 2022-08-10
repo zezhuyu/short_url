@@ -1,0 +1,5 @@
+{
+	"MONGODB_URL": "mongodb://localhost/shorturl",
+	"PORT": 5000,
+	"TOKEN": "8dbad84359efa2d9857e13de8045788c42c91033"
+}
