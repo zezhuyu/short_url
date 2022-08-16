@@ -1,9 +1,9 @@
 {
-    "API_URL": "http://localhost:5002/api/client/auth",
-    "AUTH_TOKEN": "8bbd8d946943315d396021f3aa714a20c5598a7d",
-    "DOMAIN": "http://xsam.me",
+    "API_URL": "http://YOUR_APT_URL/api/client/auth",
+    "AUTH_TOKEN": "",
+    "DOMAIN": "http://",
     "KEYWORD_LENGTH": 6,
-    "TITEL": "SAM QLink",
+    "TITEL": "Example",
     "DESCRIPTION": "A simple URL shortener create for all sam websites",
     "LOGOPATH": "./logo.png", 
     "BACKGROUND": "./bg.jpg",
