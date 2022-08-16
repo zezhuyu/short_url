@@ -8,7 +8,6 @@ router.route("/client/auth/save").post(async(req, res) => {
     if(req.headers['auth-token'] !== config.CLIENT_TOKEN){
         return res.status(401).send({ auth: false, message: 'No token provided.' });
     }
-    console.log(req.body);
     const newPost = new Posts({
         url : req.body.url,
         code : req.body.code
@@ -25,17 +24,14 @@ router.route("/client/auth/check").post(async(req, res) => {
     if(req.headers['auth-token'] !== config.CLIENT_TOKEN){
         return res.status(401).send({ auth: false, message: 'No token provided.' });
     }
-    console.log(req.body.type, req.body.url, req.body.code);
     if(req.body.type === "url"){
         Posts.findOne({url: req.body.url}).then(post => {
-            console.log(post);
             res.send(post);
         }).catch(err => {
             res.send(err);
         });
     } else if(req.body.type === "code"){
         Posts.findOne({code: req.body.code}).then(post => {
-            console.log(post);
             res.json(post);
         }).catch(err => {
             res.send(err);

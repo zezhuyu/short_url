@@ -1,9 +1,9 @@
 {
-	"MONGODB_URL": "mongodb://localhost/shorturl",
-	"COLLECTION_NAME": "urls",
+	"MONGODB_URL": "mongodb://YOUR_MONGODB_URL",
+	"COLLECTION_NAME": "",
 	"PORT": 5001,
-	"CLINNT_URL": "http://www.google.com",
-	"CLIENT_TOKEN": "75b7447e0187bdbd061a43437244a54c73d2a19b",
-	"ADMIN_TOKEN": "75b7447e0187bdbd061a43437244a54c73d2a19b",
-	"APP_TOKEN": "75b7447e0187bdbd061a43437244a54c73d2a19b"
+	"CLINNT_URL": "https://YOUR_CLIENT_URL",
+	"CLIENT_TOKEN": "",
+	"ADMIN_TOKEN": "",
+	"APP_TOKEN": ""
 }

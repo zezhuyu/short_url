@@ -1,8 +1,13 @@
 {
-    "API_URL": "http://localhost:5001/api/client/auth",
-    "AUTH_TOKEN": "75b7447e0187bdbd061a43437244a54c73d2a19b",
-    "DOMAIN": "example.com",
+    "API_URL": "http://YOUR_BACKEND_URL/api/client/auth",
+    "AUTH_TOKEN": "",
+    "DOMAIN": "http://YOUR_CLIENT_URL",
     "KEYWORD_LENGTH": 6,
+    "TITEL": "Example",
+    "DESCRIPTION": "Example",
+    "LOGOPATH": "./logo.png", 
+    "BACKGROUND": "./bg.jpg",
     "BLACK_LIST": [],
     "KEYWORD_BLACK_LIST": ["api"]
+
 }

@@ -7,7 +7,7 @@ import clientApi from "./routers/post.js";
 //import admin from "./routers/admin";
 
 mongoose.connect(config.MONGODB_URL, { useNewUrlParser: true }, () => {
-  console.log("MongoDB connected!");
+  console.log("Start to connect to MongoDB!");
 });
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
@@ -21,7 +21,6 @@ app.use(cors());
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  console.log(req.body);
   const redirectHtml = `<script>location.href = "${config.CLINNT_URL}";</script>`;
   res.end(redirectHtml);
 });

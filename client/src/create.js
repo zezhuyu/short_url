@@ -18,20 +18,20 @@ function CheckInput(seterr){
     keyword = document.getElementById("keyword").value;
     const form = /^(?:(http|https):\/\/)?((?:[\w-]+\.)+[a-z0-9]+)((?:\/[^/?#]*)+)?(\?[^#]+)?(#.+)?$/i;
     if (url === "") {
-      seterr("网址不能为空！");
+      seterr("URL can not be empty!");
       return false;
     }else if (!form.test(url)) {
-      seterr("网址格式不正确！");
+      seterr("URL format error!");
       return false;
     }
     else if(keyword.length > config.KEYWORD_LENGTH){
-      seterr("自定义网址长度不能超过" + config.KEYWORD_LENGTH + "位");
+      seterr("Keyword length cannot have more than" + config.KEYWORD_LENGTH + "characters!");
       return false;
     }else if(!checkDomain(url)){
-      seterr("网站被禁止");
+      seterr("URL domain is not allowed!");
       return false;
-    }else if(keyword.indexOf(config.KEYWORD_BLACK_LIST) !== -1){
-        seterr("自定义网址不能包含黑名单字符");
+    }else if(keyword.indexOf(config.KEYWORD_BLACK_LIST) !== -1 || keyword.includes('/')){
+        seterr("Keyword contains illegal characters!");
         return false;
     }
     return true;
