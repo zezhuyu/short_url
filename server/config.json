@@ -1,9 +1,9 @@
 {
-	"MONGODB_URL": "mongodb://localhost/urls",
-	"COLLECTION_NAME": "urls",
+	"MONGODB_URL": "mongodb://YOUR_DB_URL/YOUR_DB",
+	"COLLECTION_NAME": "YOUR_COLLECTION_NAME",
 	"PORT": 5002,
-	"CLINNT_URL": "http://xsam.me",
-	"CLIENT_TOKEN": "84f6812617de9b6ad77fbafb2a7f99ba042a38eb",
+	"CLINNT_URL": "http://",
+	"CLIENT_TOKEN": "",
 	"ADMIN_TOKEN": "",
 	"APP_TOKEN": ""
 }
