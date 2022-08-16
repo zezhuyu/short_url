@@ -1,24 +1,47 @@
+import axios from "axios"
 import config from './config.json';
-import mongoose from 'mongoose';
-import moment from 'moment';
-//const db = mongoose.createConnection(config.MONGODB_URL);
-const urlSchema = new mongoose.Schema({
-    url: { type: String, required: true },
-    code: { type: String, required: true },
-    date: { type: Date, default: moment().format('YYYY-MM-DD HH:mm:ss') }
-});
 
+var data = {
+    type: "",
+    url: "",
+    code: ""
+  };
+  
+  let axiosHeader = {
+    headers: {
+        'Content-Type': 'application/json',
+        'auth-token': config.AUTH_TOKEN,
+        "Access-Control-Allow-Origin": "*"
+    }
+  };
 
-function Store(url, code) {
-    return true;
-}
+  /*const fetchAPI = async (urlI, codeI, storemode, urlmode) => {
+    data.url = urlI;
+    data.type = "url";
+    const response = await axios.post(`${config.API_URL}/check`, data, axiosHeader);
+    return response.data;
+    
+  };*/
 
-function CheckURL(url) {
-    return true;
-}
+  const fetchAPI = async (urlI, codeI, storemode, urlmode) => {
+    var suffix = "";
+    if(storemode){
+        suffix = "save";
+        data.url = urlI;
+        data.code = codeI;
+    }
+    else if(urlmode){
+        suffix = "check";
+        data.type = "url";
+        data.url = urlI;
+    }
+    else{
+        suffix = "check";
+        data.type = "code";
+        data.code = codeI;
+    }
+    const result = await axios.post(`${config.API_URL}/${suffix}`, data, axiosHeader);
+    return result.data;
+  }
 
-function GetURL(code) {
-    return true;
-}
-
-export {Store, CheckURL, GetURL};
+export default fetchAPI;

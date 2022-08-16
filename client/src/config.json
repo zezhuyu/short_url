@@ -1,7 +1,8 @@
 {
-    "API_URL": "",
-    "AUTH_TOKEN": "3d17a5f0de4cc1ad0bfc175783c18785ab226949",
+    "API_URL": "http://localhost:5001/api/client/auth",
+    "AUTH_TOKEN": "75b7447e0187bdbd061a43437244a54c73d2a19b",
     "DOMAIN": "example.com",
     "KEYWORD_LENGTH": 6,
-    "BLACK_LIST": []
+    "BLACK_LIST": [],
+    "KEYWORD_BLACK_LIST": ["api"]
 }

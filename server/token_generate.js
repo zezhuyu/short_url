@@ -9,6 +9,7 @@ for(var i=0; i<15; i++){
     token += arr[index];
 }
 token += Date.now();
+
 token = hash(token);
 console.log("\n请妥善保管token, 您的token为: " + token+"\n");
 token = hash(token);
