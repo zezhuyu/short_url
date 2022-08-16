@@ -6,7 +6,9 @@
   height: 20vmin;
   pointer-events: none;
 }
-
+.space {
+  height: 10vmin;
+}
 .App-header {
   min-height: 100vh;
   display: flex;

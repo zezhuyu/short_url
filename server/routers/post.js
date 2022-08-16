@@ -1,11 +1,12 @@
 import express from "express";
+import hash from 'object-hash';
 import Posts from "../models/post.js";
 import config from "../config.json" assert {type: "json"};
 
 const router = express.Router();
 
 router.route("/client/auth/save").post(async(req, res) => {
-    if(req.headers['auth-token'] !== config.CLIENT_TOKEN){
+    if(hash(req.headers['auth-token']) !== config.CLIENT_TOKEN){
         return res.status(401).send({ auth: false, message: 'No token provided.' });
     }
     const newPost = new Posts({
@@ -13,7 +14,7 @@ router.route("/client/auth/save").post(async(req, res) => {
         code : req.body.code
     });
     await newPost.save().then(() => {
-        res.send({"message": "success"});
+        res.send({message: "success"});
     }
     ).catch(err => {
         res.send(err);
@@ -21,7 +22,7 @@ router.route("/client/auth/save").post(async(req, res) => {
 });
 
 router.route("/client/auth/check").post(async(req, res) => {
-    if(req.headers['auth-token'] !== config.CLIENT_TOKEN){
+    if(hash(req.headers['auth-token']) !== config.CLIENT_TOKEN){
         return res.status(401).send({ auth: false, message: 'No token provided.' });
     }
     if(req.body.type === "url"){
@@ -37,14 +38,18 @@ router.route("/client/auth/check").post(async(req, res) => {
             res.send(err);
         });
     } else {
-        res.send({"message": "Invalid type"});
+        res.send({message: "Invalid type"});
     }
 });
 
-router.route("/server/auth").get((req, res) => {
-    res.send("Hello from client");
-}).post((req, res) => {
-    const post = new Posts(req.body);
+router.route("/server/auth/save").post((req, res) => {
+    if(hash(req.headers['auth-token']) !== config.APP_TOKEN){
+        return res.status(401).send({ auth: false, message: 'No token provided.' });
+    }
+    const newPost = new Posts({
+        url : req.body.url,
+        code : req.body.code
+    });
     post.save((err, post) => {
         if (err) {
             res.send(err);

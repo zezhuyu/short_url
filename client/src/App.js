@@ -85,7 +85,7 @@ function Home(){
         <link rel="icon" href={config.LOGOPATH} type="image/icon type"></link>
       </Helmet>
       <header className="App-header inset-1.5 bg-current bg-cover bg-no-repeat bg-center" style={{backgroundImage: 'url(' + config.BACKGROUND || null + ')'}} >
-        <div className="App-logo"/>
+        <div className="space"/>
         <Img src={config.LOGOPATH} className="App-logo" alt=''/>
         <h1 className='text-5xl font-serif font-medium tracking-wide leading-loose text-sky-500'>{config.TITEL}</h1>
         <Space direction="" onKeyDown={onKeyEnter} className='grid gap-3 mb-6 md:grid-cols-2'>
@@ -99,7 +99,6 @@ function Home(){
           <span className='text-cyan-500 text-5xl leading-normal'>{shorturl}</span>
         </CopyToClipboard>
         <QRC value={shorturl} size={300}/>
-        
       </header>
       <footer className="text-slate-900 bg-white md:p-5 text-center dark:bg-gray-600 dark:text-slate-50 inset-x-0 bottom-0">
         <span>Copyright &copy; {new Date().getFullYear()} {config.TITEL} All Rights Reserved.</span>
@@ -112,7 +111,10 @@ function Home(){
 const QRC = (input) => {
   if(input.value !== ""){
     return (
+      <>
       <QRCode value={input.value} size={input.size} />
+      <div className="space"/>
+      </>
     );
   }
   return;
