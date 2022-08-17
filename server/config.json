@@ -3,7 +3,10 @@
 	"COLLECTION_NAME": "urls",
 	"PORT": 5002,
 	"CLINNT_URL": "http://xsam.me",
+	"KEYWORD_LENGTH": 6,
 	"CLIENT_TOKEN": "84f6812617de9b6ad77fbafb2a7f99ba042a38eb",
 	"ADMIN_TOKEN": "",
-	"APP_TOKEN": ""
+	"APP_TOKEN": "1520aeda978f77bdb4b94fc9d731bbd3a306c5f2",
+	"BLACK_LIST": [],
+    "KEYWORD_BLACK_LIST": ["api"]
 }

@@ -1,4 +1,4 @@
-import config from './config.json';
+import config from '../config.json' assert {type: "json"};
 
 var url = "";
 var keyword = "";
@@ -13,9 +13,7 @@ function CreateCode() {
     return keyword;
 }
 
-function CheckInput(errmsg){
-    url = document.getElementById("url").value;
-    keyword = document.getElementById("keyword").value;
+function CheckInput(url, keyword = "", errmsg){
     const form = /^(?:(http|https):\/\/)?((?:[\w-]+\.)+[a-z0-9]+)((?:\/[^/?#]*)+)?(\?[^#]+)?(#.+)?$/i;
     if (url === "") {
       errmsg = {error: "URL can not be empty!"};

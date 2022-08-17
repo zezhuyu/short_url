@@ -43,7 +43,9 @@ function Home(){
     if(CheckInput(seterr)){
       const newkeyword = await fetchAPI(url, null, false, true);
       if(newkeyword !== null && newkeyword !== ""){
-        seterr("该网址已存在");
+        if(keyword !== ""){
+          seterr("This url has been shortened");
+        }
         setshorturl(config.DOMAIN + "/" + newkeyword.code);
         return;
       }
@@ -100,7 +102,7 @@ function Home(){
         </CopyToClipboard>
         <QRC value={shorturl} size={300}/>
       </header>
-      <footer className="text-slate-900 bg-white md:p-5 text-center dark:bg-gray-600 dark:text-slate-50 inset-x-0 bottom-0">
+      <footer className="md:p-5 text-center bg-gray-700 text-slate-50 inset-x-0 bottom-0">
         <span>Copyright &copy; {new Date().getFullYear()} {config.TITEL} All Rights Reserved.</span>
         <span><br/>Photo by <a href="https://unsplash.com/@omnis23?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Pietro Guarino</a> on <a href="https://unsplash.com/s/photos/montain?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a></span>
       </footer>

@@ -1,12 +1,13 @@
 import express from "express";
 import hash from 'object-hash';
 import Posts from "../models/post.js";
+import {CreateCode, CheckInput} from "../models/check.js";
 import config from "../config.json" assert {type: "json"};
 
 const router = express.Router();
 
 router.route("/client/auth/save").post(async(req, res) => {
-    if(hash(req.headers['auth-token']) !== config.CLIENT_TOKEN){
+    if(req.headers['auth-token'] == null || hash(req.headers['auth-token']) !== config.CLIENT_TOKEN){
         return res.status(401).send({ auth: false, message: 'No token provided.' });
     }
     const newPost = new Posts({
@@ -22,7 +23,7 @@ router.route("/client/auth/save").post(async(req, res) => {
 });
 
 router.route("/client/auth/check").post(async(req, res) => {
-    if(hash(req.headers['auth-token']) !== config.CLIENT_TOKEN){
+    if(req.headers['auth-token'] == null || hash(req.headers['auth-token']) !== config.CLIENT_TOKEN){
         return res.status(401).send({ auth: false, message: 'No token provided.' });
     }
     if(req.body.type === "url"){
@@ -42,20 +43,52 @@ router.route("/client/auth/check").post(async(req, res) => {
     }
 });
 
-router.route("/server/auth/save").post((req, res) => {
-    if(hash(req.headers['auth-token']) !== config.APP_TOKEN){
+router.route("/server/auth/store").post(async(req, res) => {
+    if(req.headers['auth-token'] == null || hash(req.headers['auth-token']) !== config.APP_TOKEN){
         return res.status(401).send({ auth: false, message: 'No token provided.' });
+    }
+    var errmsg ={};
+    var ifstop = false;
+    if(CheckInput(req.body.url, req.body.code, errmsg) === false){
+        return res.send(errmsg);
+    }
+    await Posts.findOne({url: req.body.url}).then(post => {
+        if(post !== null){
+            ifstop = true;
+            return res.send({shorturl: config.CLINNT_URL + "/" + post.code});;
+        }
+    });
+    
+    await Posts.findOne({code: req.body.code}).then(post => {
+        if(post !== null){
+            ifstop = true;
+            return res.send({message: "code already exists"});
+        }
+    });
+    var check = true;
+    var result = req.body.code;
+    if(result === "" || result === null || result === undefined){
+        while(check && !ifstop){
+            result = CreateCode();
+            await Posts.findOne({code: result}).then(post => {
+                if(post === null){
+                    check = false;
+                }
+            });
+        }
     }
     const newPost = new Posts({
         url : req.body.url,
-        code : req.body.code
+        code : result
     });
-    post.save((err, post) => {
-        if (err) {
+    if(!ifstop){
+        await newPost.save().then(() => {
+            console.log({shorturl: config.CLINNT_URL + "/" + result});
+            res.send({shorturl: config.CLINNT_URL + "/" + result});
+        }).catch(err => {
             res.send(err);
-        }
-        res.json(post);
-    });
+        });
+    }
 });
 
 router.route("/").get((req, res) => {
