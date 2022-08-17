@@ -1,12 +1,12 @@
 {
-	"MONGODB_URL": "mongodb://localhost/urls",
-	"COLLECTION_NAME": "urls",
+	"MONGODB_URL": "mongodb://YOUR_DB_URL/YOUR_DB",
+	"COLLECTION_NAME": "YOUR_COLLECTION_NAME",
 	"PORT": 5002,
-	"CLINNT_URL": "http://xsam.me",
-	"KEYWORD_LENGTH": 6,
-	"CLIENT_TOKEN": "84f6812617de9b6ad77fbafb2a7f99ba042a38eb",
+	"CLINNT_URL": "http://",
+	"CLIENT_TOKEN": "",
 	"ADMIN_TOKEN": "",
-	"APP_TOKEN": "1520aeda978f77bdb4b94fc9d731bbd3a306c5f2",
+	"APP_TOKEN": "",
+	"KEYWORD_LENGTH": 6,
 	"BLACK_LIST": [],
     "KEYWORD_BLACK_LIST": ["api"]
 }
