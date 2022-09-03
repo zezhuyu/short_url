@@ -18,7 +18,9 @@ function App() {
       <Router>
         <Routes>
           <Route exact path="/" element={<Home />} />
+          <Route exact path="/404" element={<NotFound />} />
           <Route path="/:code" element={<RedirectTo />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
     </div>
@@ -28,7 +30,7 @@ function App() {
 
 function Home(){
   const [shorturl, setshorturl] = useState("");
-  const [err, seterr] = useState("");
+  const [err, seterr] = useState();
   const onKeyEnter = (e) => {
     if(e.keyCode === 13) {
        OnClick();
@@ -95,7 +97,7 @@ function Home(){
           <Input className=" text-slate-900" clearable placeholder="Keyword(optional)" size="large" id="keyword" />
           
         </Space>
-        <button onClick={OnClick} className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'>点击保存</button>
+        <button onClick={OnClick} className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'>Create</button>
         <span className='text-red-500 text-3xl leading-loose'>{err}</span>
         <CopyToClipboard text={shorturl} >
           <span className='text-cyan-500 text-5xl leading-normal'>{shorturl}</span>
@@ -131,6 +133,29 @@ const Img = (input) => {
   return;
 }
 
+function NotFound (){
+  return (
+    <div className="App">
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>{config.TITEL}</title>
+        <meta name="description" content={config.DESCRIPTION}/>
+        <link rel="icon" href={config.DOMAIN + config.LOGOPATH} type="image/icon type"></link>
+      </Helmet>
+      <header className="App-header inset-1.5 bg-current bg-cover bg-no-repeat bg-center" style={{backgroundImage: 'url(' + config.DOMAIN + config.BACKGROUND || null + ')'}} >
+        <div className="space"/>
+        <Img src={config.DOMAIN + config.LOGOPATH} className="App-logo" alt=''/>
+        <h1 className='text-5xl font-serif font-medium tracking-wide leading-loose text-sky-500'>{config.TITEL}</h1>
+        <span className='mt-8 text-red-500 text-3xl leading-loose'>Invalid keyword!</span>
+        <button onClick={()=>{window.location.replace('/');}} className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'>Home</button>
+      </header>
+      <footer className="md:p-5 text-center bg-gray-700 text-slate-50 inset-x-0 bottom-0">
+        <span>Copyright &copy; {new Date().getFullYear()} {config.TITEL} All Rights Reserved.</span>
+        <span><br/>Photo by <a href="https://unsplash.com/@omnis23?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Pietro Guarino</a> on <a href="https://unsplash.com/s/photos/montain?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a></span>
+      </footer>
+    </div>
+  );
+}
 
 function RedirectTo() {
   const {code} = useParams();
@@ -138,7 +163,7 @@ function RedirectTo() {
   const fetchdata = async () => {
     url = await fetchAPI (null, code, false, false);
     if(url === null || url === ""){
-      return window.location.replace(config.DOMAIN);
+      return window.location.replace(config.DOMAIN + '/404');
     }
     return  window.location.replace(url.url);
   }
