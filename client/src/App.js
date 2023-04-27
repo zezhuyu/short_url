@@ -10,6 +10,9 @@ import config from './config.json';
 import {useState} from 'react';
 import {Helmet} from 'react-helmet';
 
+import bg from './comp/bg.jpg';
+import logo from './comp/logo.png';
+
 
 function App() {
   
@@ -86,14 +89,14 @@ function Home(){
         <meta charSet="utf-8" />
         <title>{config.TITEL}</title>
         <meta name="description" content={config.DESCRIPTION}/>
-        <link rel="icon" href={config.LOGOPATH} type="image/icon type"></link>
+        <link rel="icon" href={logo} type="image/icon type"></link>
       </Helmet>
-      <header className="App-header inset-1.5 bg-current bg-cover bg-no-repeat bg-center" style={{backgroundImage: 'url(' + config.BACKGROUND || null + ')'}} >
+      <header className="App-header inset-1.5 bg-current bg-cover bg-no-repeat bg-center" style={{backgroundImage: 'url(' + bg + ')'}} >
         <div className="space"/>
-        <Img src={config.LOGOPATH} className="App-logo" alt=''/>
+        <Img src={logo} className="App-logo" alt=''/>
         <h1 className='text-5xl font-serif font-medium tracking-wide leading-loose text-sky-500'>{config.TITEL}</h1>
-        <Space direction="" onKeyDown={onKeyEnter} className='grid gap-3 mb-6 md:grid-cols-2'>
-          <Input className=" text-slate-900" clearable placeholder="URL(start with http/https)" size="large" id="url" required />
+        <Space direction="" onKeyDown={onKeyEnter} className='grid gap-3 mb-6 md:grid-cols-2 w-1/2 items-center '>
+          <Input className=" text-slate-900 block" clearable placeholder="URL(start with http/https)" size="large" id="url" required />
           <Input className=" text-slate-900" clearable placeholder="Keyword(optional)" size="large" id="keyword" />
           
         </Space>
@@ -140,11 +143,11 @@ function NotFound (){
         <meta charSet="utf-8" />
         <title>{config.TITEL}</title>
         <meta name="description" content={config.DESCRIPTION}/>
-        <link rel="icon" href={config.DOMAIN + config.LOGOPATH} type="image/icon type"></link>
+        <link rel="icon" href={logo} type="image/icon type"></link>
       </Helmet>
-      <header className="App-header inset-1.5 bg-current bg-cover bg-no-repeat bg-center" style={{backgroundImage: 'url(' + config.DOMAIN + config.BACKGROUND || null + ')'}} >
+      <header className="App-header inset-1.5 bg-current bg-cover bg-no-repeat bg-center" style={{backgroundImage: 'url(' + bg + ')'}} >
         <div className="space"/>
-        <Img src={config.DOMAIN + config.LOGOPATH} className="App-logo" alt=''/>
+        <Img src={logo} className="App-logo" alt=''/>
         <h1 className='text-5xl font-serif font-medium tracking-wide leading-loose text-sky-500'>{config.TITEL}</h1>
         <span className='mt-8 text-red-500 text-3xl leading-loose'>Invalid keyword!</span>
         <button onClick={()=>{window.location.replace('/');}} className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'>Home</button>

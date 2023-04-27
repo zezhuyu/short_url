@@ -1,0 +1,26 @@
+version: '2.0'
+
+services:
+  mongo:
+    image: mongo:latest
+    ports:
+      - "127.0.0.1:27017:27017"
+    volumes:
+      - ./data:/data/db
+    restart: always
+
+  main:
+    build: .
+    links:
+      - mongo
+    ports:
+      - "5002:5002"
+    depends_on:
+      - mongo
+    restart: always
+    environment:
+      PORT: 5002
+      MONGODB_URL: "mongo"
+      MONGO_PORT: 27017
+      MONGO_DB: urls
+      COLLECTION_NAME: urls

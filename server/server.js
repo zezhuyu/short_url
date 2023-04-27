@@ -2,11 +2,11 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import hash from "object-hash";
-import config from "./config.json" assert {type: "json"};
+import config from "./config.js";
 import clientApi from "./routers/post.js";
 //import admin from "./routers/admin";
 
-mongoose.connect(config.MONGODB_URL, { useNewUrlParser: true }, () => {
+mongoose.connect(`mongodb://${config.MONGODB_URL}:${config.MONGO_PORT}/${config.MONGO_DB}`, { useNewUrlParser: true }, () => {
   console.log("Start to connect to MongoDB!");
 });
 const db = mongoose.connection;

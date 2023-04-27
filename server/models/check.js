@@ -1,4 +1,4 @@
-import config from '../config.json' assert {type: "json"};
+import config from "../config.js";
 
 var url = "";
 var keyword = "";
@@ -20,10 +20,6 @@ function CheckInput(url, keyword = "", errmsg){
       return false;
     }else if (!form.test(url)) {
         errmsg = {error: "URL format error!"};
-      return false;
-    }
-    else if(keyword.length > config.KEYWORD_LENGTH){
-        errmsg = {error: "Keyword length cannot have more than" + config.KEYWORD_LENGTH + "characters!"};
       return false;
     }else if(!checkDomain(url)){
         errmsg = {error: "URL domain is not allowed!"};
@@ -51,3 +47,5 @@ function CheckInput(url, keyword = "", errmsg){
   }
 
 export { CreateCode, CheckInput };
+
+console.log(CheckInput("https://www.samproduce.com/contact", "contact"))

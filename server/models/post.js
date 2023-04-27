@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import moment from 'moment';
-import config from '../config.json' assert {type: "json"};
+import config from "../config.js";
 
 const userSchema = new mongoose.Schema({
     url: { type: String, required: true, unique: true },
