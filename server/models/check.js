@@ -1,10 +1,7 @@
 import config from "../config.js";
 
-var url = "";
-var keyword = "";
-
-
 function CreateCode() {
+  var keyword = "";
   const arr = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
     for(var i=0; i<config.KEYWORD_LENGTH; i++){
       var index = Math.floor(Math.random()*arr.length);
@@ -48,4 +45,5 @@ function CheckInput(url, keyword = "", errmsg){
 
 export { CreateCode, CheckInput };
 
-console.log(CheckInput("https://www.samproduce.com/contact", "contact"))
+
+for (var i = 0; i < 10; i++) console.log(CreateCode());
